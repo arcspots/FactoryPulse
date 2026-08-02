@@ -1,266 +1,461 @@
-FactoryPulse
-Plataforma Industrial de Monitoramento IoT em Tempo Real
+# FactoryPulse
 
-O FactoryPulse é uma plataforma de monitoramento industrial desenvolvida para simular e acompanhar operações de chão de fábrica através de telemetria em tempo real, análise de saúde de máquinas e dashboards operacionais.
+## Plataforma Industrial de Monitoramento IoT em Tempo Real
 
-O sistema recebe dados de sensores industriais como temperatura, pressão, RPM e produção, processa essas informações através de regras de negócio, calcula a saúde operacional das máquinas e transmite atualizações instantaneamente para usuários conectados.
+# Sobre o projeto
 
-.NET 9 ASP.NET Core React TypeScript SignalR SQL Server
+O **FactoryPulse** é uma plataforma de monitoramento industrial desenvolvida para simular e acompanhar operações de chão de fábrica utilizando telemetria em tempo real, análise de saúde de máquinas e dashboards operacionais.
 
-Visão geral
-O FactoryPulse foi construído simulando um cenário real de indústria conectada:
+O sistema representa um ambiente de **Indústria 4.0**, onde máquinas enviam informações continuamente, o backend processa esses dados, aplica regras de negócio e calcula indicadores operacionais.
 
-Máquinas enviam informações de telemetria continuamente
-A aplicação processa os dados recebidos
-Um motor de análise calcula a condição operacional
-Alertas são gerados conforme regras de negócio
-O dashboard recebe atualizações em tempo real sem necessidade de atualização manual
-O objetivo do projeto é demonstrar uma arquitetura moderna para sistemas industriais utilizando backend .NET, comunicação em tempo real e separação de responsabilidades.
 
-Diferenciais técnicos
-Arquitetura baseada em Clean Architecture
-O projeto foi estruturado seguindo uma separação clara entre domínio, regras de negócio, infraestrutura e exposição da API.
+![.NET 9](https://img.shields.io/badge/.NET-9-512BD4?logo=dotnet)
+![ASP.NET Core](https://img.shields.io/badge/ASP.NET-Core-512BD4?logo=dotnet)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript)
+![SignalR](https://img.shields.io/badge/SignalR-Realtime-blue)
+![SQL Server](https://img.shields.io/badge/SQL_Server-Database-red)
 
-Em vez de concentrar toda lógica em Controllers, o FactoryPulse mantém responsabilidades bem definidas:
+---
 
-Domain → Entidades e regras fundamentais do negócio
-Application → Casos de uso, serviços, DTOs, validações e motores de decisão
-Infrastructure → Persistência, Entity Framework Core, migrations e repositórios
-API → Controllers, SignalR Hub, middleware e configuração da aplicação
-Comunicação em tempo real com SignalR
-Sistemas industriais precisam reagir rapidamente a mudanças de estado.
 
-Por isso, o FactoryPulse utiliza SignalR para comunicação em tempo real entre backend e frontend.
 
-Fluxo:
+A aplicação monitora informações como:
 
-Telemetry Update
+* Temperatura
+* Pressão
+* RPM
+* Produção acumulada
+* Estado operacional das máquinas
+
+Os dados são transmitidos em tempo real para o dashboard utilizando **SignalR**, permitindo acompanhamento instantâneo sem necessidade de atualização manual.
+
+---
+
+# Objetivo do projeto
+
+O objetivo do FactoryPulse é demonstrar uma arquitetura moderna aplicada a sistemas industriais conectados, utilizando:
+
+* Backend escalável em .NET 9
+* Clean Architecture
+* Comunicação em tempo real
+* Processamento de telemetria
+* Regras de negócio industriais
+* Dashboard operacional
+* Simulação de sensores IoT
+
+---
+
+# Visão geral da arquitetura
+
+O FactoryPulse simula um cenário real de fábrica conectada:
+
+```
+Sensores Industriais
+        |
         |
         v
-TelemetryService
+Telemetry Simulator
+        |
         |
         v
-HealthEngine
+ASP.NET Core API
         |
-        +------------+
-        |            |
-        v            v
- SQL Server     SignalR Hub
-                     |
-                     v
-             React Dashboard
-O dashboard não depende de polling constante. As alterações são enviadas aos clientes conectados no momento em que acontecem.
+        |
+        +--------------------+
+        |                    |
+        v                    v
+Health Engine          SQL Server
+        |
+        |
+        v
+SignalR Hub
+        |
+        |
+        v
+React Dashboard
+```
 
-Motor de saúde das máquinas
-O sistema possui um motor responsável por analisar condições operacionais.
+Fluxo operacional:
 
-Os indicadores avaliados incluem:
+1. Máquinas enviam dados de telemetria
+2. O backend recebe e valida informações
+3. O sistema processa regras de negócio
+4. O Health Engine calcula a condição operacional
+5. Alertas são gerados conforme severidade
+6. O dashboard recebe atualizações em tempo real
 
-Temperatura
-Pressão
-RPM
-Produção
-Cada máquina recebe um score operacional:
+---
 
-100
- |
-Healthy
- |
-Warning
- |
-Critical
- |
-Emergency
- |
-0
-A classificação é baseada em regras de negócio, permitindo representar cenários reais de manutenção preditiva.
+# Arquitetura de software
 
-Funcionalidades
-Telemetria
-Recepção de dados industriais
-Temperatura
-Pressão
-RPM
-Produção acumulada
-Histórico por máquina
-Dashboard operacional
-Visualização geral da fábrica
-Status individual das máquinas
-Atualização em tempo real
-Indicadores operacionais
-Gráficos de telemetria
-Gestão de máquinas
-Cadastro de máquinas
-Consulta de informações operacionais
-Histórico de funcionamento
-Inspeção detalhada
-Sistema de alertas
-Alertas por severidade
-Histórico de eventos
-Associação por máquina
-Monitoramento de condições críticas
-Simulador industrial
-Como o projeto não depende de hardware físico, foi desenvolvido um simulador de telemetria.
+O projeto utiliza princípios de **Clean Architecture**, mantendo responsabilidades separadas entre domínio, aplicação, infraestrutura e API.
 
-O serviço:
+Estrutura:
 
-Executa em background
-Gera dados continuamente
-Simula comportamento de sensores
-Mantém o dashboard sempre ativo
-Arquitetura
+```
 FactoryPulse
 
+│
 ├── FactoryPulse.Domain
 │
-│   Entidades:
-│   - Machine
-│   - Telemetry
-│   - Alert
-│   - Event
+│   ├── Entities
+│   ├── Business Rules
+│   └── Domain Models
 │
 │
 ├── FactoryPulse.Application
 │
-│   - Services
-│   - DTOs
-│   - Validators
-│   - HealthEngine
-│   - TelemetrySimulator
+│   ├── Services
+│   ├── DTOs
+│   ├── Validators
+│   ├── Use Cases
+│   └── Health Engine
 │
 │
 ├── FactoryPulse.Infrastructure
 │
-│   - Entity Framework Core
-│   - SQL Server
-│   - Repositories
-│   - Database Seed
-│   - Migrations
+│   ├── Entity Framework Core
+│   ├── SQL Server
+│   ├── Repositories
+│   ├── Database Seed
+│   └── Migrations
 │
 │
 └── FactoryPulse.Api
-    - Controllers
-    - SignalR Hub
-    - Middleware
-    - Swagger
-Stack utilizada
-Backend
-.NET 9
-ASP.NET Core Web API
-Entity Framework Core 9
-SQL Server
-SignalR
-FluentValidation
-Swagger / OpenAPI
-Frontend
-React 19
-TypeScript
-Vite
-CSS
-Cliente SignalR
-Estrutura do projeto
+    
+    ├── Controllers
+    ├── SignalR Hub
+    ├── Middleware
+    └── Application Configuration
+```
+
+---
+
+# Comunicação em tempo real com SignalR
+
+Ambientes industriais precisam reagir rapidamente a mudanças.
+
+Por isso o FactoryPulse utiliza **SignalR** para comunicação em tempo real entre backend e frontend.
+
+Fluxo:
+
+```
+Telemetry Update
+
+        |
+        v
+
+Telemetry Service
+
+        |
+        v
+
+Health Engine
+
+        |
+        +----------------+
+        |                |
+        v                v
+
+   SQL Server       SignalR Hub
+
+                         |
+                         v
+
+                 React Dashboard
+```
+
+O dashboard não depende de consultas constantes ao servidor.
+
+Quando uma alteração acontece, o backend envia automaticamente a atualização para os clientes conectados.
+
+---
+
+# Machine Health Engine
+
+O FactoryPulse possui um motor de análise responsável por avaliar a saúde operacional das máquinas.
+
+Os indicadores analisados incluem:
+
+| Indicador   | Função                |
+| ----------- | --------------------- |
+| Temperatura | Monitoramento térmico |
+| Pressão     | Controle operacional  |
+| RPM         | Desempenho mecânico   |
+| Produção    | Eficiência produtiva  |
+
+Cada máquina recebe um score operacional:
+
+```
+100
+
+|
+|
+|  HEALTHY
+|
+|  WARNING
+|
+|  CRITICAL
+|
+|
+0
+```
+
+Esse modelo permite representar cenários de:
+
+* Monitoramento preventivo
+* Identificação de anomalias
+* Manutenção preditiva
+* Alertas operacionais
+
+---
+
+# Funcionalidades
+
+## Telemetria
+
+* Recepção de dados industriais
+* Temperatura
+* Pressão
+* RPM
+* Produção acumulada
+* Histórico por máquina
+
+## Dashboard operacional
+
+* Visão geral da fábrica
+* Status individual das máquinas
+* Atualização em tempo real
+* Indicadores operacionais
+* Gráficos de telemetria
+
+## Gestão de máquinas
+
+* Cadastro de máquinas
+* Consulta operacional
+* Histórico de funcionamento
+* Inspeção detalhada
+
+## Sistema de alertas
+
+* Alertas por severidade
+* Histórico de eventos
+* Associação por máquina
+* Monitoramento de condições críticas
+
+---
+
+# Simulador Industrial
+
+Como o projeto não depende de sensores físicos reais, foi desenvolvido um simulador de telemetria.
+
+O serviço executa em background e:
+
+* Gera dados continuamente
+* Simula comportamento de sensores industriais
+* Atualiza máquinas automaticamente
+* Mantém o dashboard ativo
+
+Esse mecanismo permite demonstrar um ambiente industrial funcional sem necessidade de hardware externo.
+
+---
+
+# Tecnologias utilizadas
+
+## Backend
+
+* .NET 9
+* ASP.NET Core Web API
+* Entity Framework Core 9
+* SQL Server
+* SignalR
+* FluentValidation
+* Swagger / OpenAPI
+
+## Frontend
+
+* React 19
+* TypeScript
+* Vite
+* CSS
+* SignalR Client
+
+---
+
+# Estrutura do projeto
+
+```
 FactoryPulse/
 
-├── backend/
 │
+├── backend/
+
 │   ├── FactoryPulse.Domain
 │   ├── FactoryPulse.Application
 │   ├── FactoryPulse.Infrastructure
 │   └── FactoryPulse.Api
 │
 │
-└── frontend/
-    │
-    └── src/
-        ├── components
-        ├── pages
-        ├── services
-        └── types
-Como executar
-Pré-requisitos
+├── frontend/
+
+│   └── src
+
+│       ├── components
+│       ├── pages
+│       ├── services
+│       └── types
+│
+│
+└── docs/
+```
+
+---
+
+# Como executar
+
+## Pré-requisitos
+
 Necessário:
 
-.NET 9 SDK
-Node.js 18+
-SQL Server ou LocalDB
-Backend
+* .NET 9 SDK
+* Node.js 18+
+* SQL Server ou LocalDB
+
+---
+
+# Backend
+
 Entre na API:
 
+```bash
 cd backend/FactoryPulse.Api
-Crie sua configuração local:
+```
 
-Copie:
+Instale dependências:
 
-appsettings.Development.example.json
-Para:
-
-appsettings.Development.json
-Configure sua connection string.
-
-Depois:
-
+```bash
 dotnet restore
+```
 
+Execute migrations:
+
+```bash
 dotnet ef database update --project ../FactoryPulse.Infrastructure
+```
 
+Execute a aplicação:
+
+```bash
 dotnet run
+```
+
 API:
 
+```
 http://localhost:5030
+```
+
 Swagger:
 
+```
 http://localhost:5030/swagger
-Frontend
+```
+
+---
+
+# Frontend
+
+Entre no frontend:
+
+```bash
 cd frontend
+```
 
+Instale dependências:
+
+```bash
 npm install
+```
 
+Execute:
+
+```bash
 npm run dev
+```
+
 Dashboard:
 
+```
 http://localhost:5173
-Endpoints principais
-Método	Endpoint	Descrição
-GET	/api/machine	Lista máquinas
-POST	/api/machine	Cria máquina
-POST	/api/telemetry	Recebe telemetria
-GET	/api/dashboard/statistics	Estatísticas gerais
-GET	/api/overview	Visão da fábrica
-GET	/api/alert	Lista alertas
-GET	/api/machinehealth/{id}	Saúde da máquina
-Próximas evoluções
+```
+
+---
+
+# Endpoints principais
+
+| Método | Endpoint                  | Descrição           |
+| ------ | ------------------------- | ------------------- |
+| GET    | /api/machine              | Lista máquinas      |
+| POST   | /api/machine              | Cria máquina        |
+| POST   | /api/telemetry            | Recebe telemetria   |
+| GET    | /api/dashboard/statistics | Estatísticas gerais |
+| GET    | /api/overview             | Visão da fábrica    |
+| GET    | /api/alert                | Lista alertas       |
+| GET    | /api/machinehealth/{id}   | Saúde da máquina    |
+
+---
+
+# Próximas evoluções
+
 Possíveis melhorias planejadas:
 
-Autenticação com JWT
-Controle de usuários e permissões
-Configuração dinâmica de limites de alerta
-Testes unitários e integração
-Docker Compose completo
-Persistência de histórico analítico
-Integração com dispositivos IoT reais
-Mensageria com Kafka/RabbitMQ
-Decisões de engenharia
-Algumas decisões importantes do projeto:
+* Autenticação JWT
+* Controle de usuários
+* Sistema de permissões
+* Configuração dinâmica de limites
+* Testes unitários
+* Testes de integração
+* Docker Compose
+* Persistência analítica
+* Integração com sensores IoT reais
+* Mensageria com Kafka/RabbitMQ
+* Arquitetura orientada a eventos
 
-Por que Clean Architecture?
-Para manter as regras de negócio independentes de frameworks e facilitar manutenção e evolução.
+---
 
-Por que SignalR?
-Porque ambientes industriais precisam de atualização imediata e comunicação eficiente entre serviços e interfaces.
+# Decisões de engenharia
 
-Por que um simulador?
-Para reproduzir um ambiente industrial funcional sem depender de sensores físicos, permitindo demonstração completa do sistema.
+## Por que Clean Architecture?
 
-Autor
-Alyson Ribeiro Cabreira
+Para manter regras de negócio independentes de frameworks e facilitar manutenção, testes e evolução do sistema.
+
+---
+
+## Por que SignalR?
+
+Porque aplicações industriais precisam de comunicação rápida e atualização imediata dos dados operacionais.
+
+---
+
+## Por que um simulador?
+
+Para reproduzir um ambiente industrial completo sem depender de sensores físicos, permitindo demonstração e desenvolvimento da plataforma.
+
+---
+
+# Autor
+
+## Alyson Ribeiro Cabreira
 
 Backend Developer focado em:
 
-.NET
-APIs
-Arquitetura de software
-Sistemas distribuídos
-Soluções industriais
+* .NET APIs
+* Arquitetura de software
+* Sistemas distribuídos
+* Soluções industriais
+* Aplicações orientadas a eventos
+
 GitHub:
 
 https://github.com/arcspots
