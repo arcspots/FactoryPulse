@@ -26,13 +26,22 @@ export default function Dashboard() {
 
 
 
-    const [selectedMachine, setSelectedMachine] =
-        useState<MachineDashboard | null>(null);
+    const [selectedMachineId, setSelectedMachineId] =
+        useState<MachineDashboard["machineId"] | null>(null);
 
 
 
     const [loading, setLoading] =
         useState(true);
+
+
+
+    // Deriva a máquina selecionada a partir da lista atual,
+    // assim ela sempre reflete o dado mais recente vindo do SignalR
+    const selectedMachine =
+        machines.find(
+            (machine) => machine.machineId === selectedMachineId
+        ) ?? null;
 
 
 
@@ -347,7 +356,7 @@ export default function Dashboard() {
         machines={machines}
 
         onSelect={
-            setSelectedMachine
+            (machine) => setSelectedMachineId(machine.machineId)
         }
 
     />
