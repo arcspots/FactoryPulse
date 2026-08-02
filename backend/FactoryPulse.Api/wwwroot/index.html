@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FactoryPulse Dashboard</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+</head>
+
+<body>
+
+    <h1>FactoryPulse Dashboard</h1>
+
+    <h2>Status</h2>
+
+    <div id="status">
+        Desconectado...
+    </div>
+
+    <hr>
+
+    <h2>Eventos</h2>
+
+    <ul id="events">
+    </ul>
+
+    <script>
+
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/hubs/dashboard")
+    .build();
+
+connection.on("DashboardUpdated", machineId => {
+
+    const li = document.createElement("li");
+
+    li.innerText =
+        "Dashboard atualizado: " +
+        machineId +
+        " - " +
+        new Date().toLocaleTimeString();
+
+    document
+        .getElementById("events")
+        .prepend(li);
+
+});
+
+connection.start().then(() => {
+
+    document
+        .getElementById("status")
+        .innerText = "Conectado";
+
+});
+
+    </script>
+
+</body>
+
+</html>

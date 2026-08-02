@@ -1,0 +1,69 @@
+### Criar máquina 01
+
+POST http://localhost:5030/api/machine
+Content-Type: application/json
+
+{
+    "name": "Prensa Hidráulica 01",
+    "sector": "Linha de Produção"
+}
+
+
+### Criar máquina 02
+
+POST http://localhost:5030/api/machine
+Content-Type: application/json
+
+{
+    "name": "Prensa Hidráulica 02",
+    "sector": "Linha de Produção"
+}
+
+
+### Criar máquina 03
+
+POST http://localhost:5030/api/machine
+Content-Type: application/json
+
+{
+    "name": "Robô Industrial ABB 01",
+    "sector": "Montagem"
+}
+
+
+### Criar máquina 04
+
+POST http://localhost:5030/api/machine
+Content-Type: application/json
+
+{
+    "name": "Esteira Transportadora 01",
+    "sector": "Logística"
+}
+
+
+### Criar máquina 05
+
+POST http://localhost:5030/api/machine
+Content-Type: application/json
+
+{
+    "name": "Forno Industrial 01",
+    "sector": "Tratamento Térmico"
+}
+
+
+### Criar máquina 06
+
+POST http://localhost:5030/api/machine
+Content-Type: application/json
+
+{
+    "name": "Compressor Pneumático 01",
+    "sector": "Utilidades"
+}
+
+
+### Listar máquinas
+
+GET http://localhost:5030/api/machine
