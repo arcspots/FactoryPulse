@@ -1,4 +1,4 @@
-FactoryPulse
+ FactoryPulse
 Plataforma Industrial de Monitoramento IoT em Tempo Real
 
 O FactoryPulse é uma plataforma de monitoramento industrial desenvolvida para simular e acompanhar operações de chão de fábrica através de telemetria em tempo real, análise de saúde de máquinas e dashboards operacionais.
