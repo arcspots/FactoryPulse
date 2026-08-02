@@ -2,6 +2,13 @@
 
 ## Plataforma Industrial de Monitoramento IoT em Tempo Real
 
+# Sobre o projeto
+
+O **FactoryPulse** é uma plataforma de monitoramento industrial desenvolvida para simular e acompanhar operações de chão de fábrica utilizando telemetria em tempo real, análise de saúde de máquinas e dashboards operacionais.
+
+O sistema representa um ambiente de **Indústria 4.0**, onde máquinas enviam informações continuamente, o backend processa esses dados, aplica regras de negócio e calcula indicadores operacionais.
+
+
 ![.NET 9](https://img.shields.io/badge/.NET-9-512BD4?logo=dotnet)
 ![ASP.NET Core](https://img.shields.io/badge/ASP.NET-Core-512BD4?logo=dotnet)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
@@ -11,11 +18,7 @@
 
 ---
 
-# Sobre o projeto
 
-O **FactoryPulse** é uma plataforma de monitoramento industrial desenvolvida para simular e acompanhar operações de chão de fábrica utilizando telemetria em tempo real, análise de saúde de máquinas e dashboards operacionais.
-
-O sistema representa um ambiente de **Indústria 4.0**, onde máquinas enviam informações continuamente, o backend processa esses dados, aplica regras de negócio e calcula indicadores operacionais.
 
 A aplicação monitora informações como:
 
