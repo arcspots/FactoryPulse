@@ -21,7 +21,6 @@ O sistema representa um ambiente de **Indústria 4.0**, onde máquinas enviam in
 
 ### ▶ Vídeo da aplicação em funcionamento
 
-[![FactoryPulse Demo](docs/images/dashboard.png)](https://youtu.be/sJ4BwxBfGrY)
 
 **Assista à demonstração completa:**
 
